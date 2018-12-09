@@ -8,7 +8,7 @@ class StepInline(admin.StackedInline):
 
     
 class CourseAdmin(admin.ModelAdmin):
-    inlines = [StepInline,]
+    inlines = [StepInline, ]
 
 
 admin.site.register(Course, CourseAdmin)

@@ -6,6 +6,8 @@ from django.contrib.auth import (
     logout,
     update_session_auth_hash,
 )
+from .models import UserProfile
+from django.contrib.auth.decorators import login_required
 from .forms import (
     RegForm, UserLoginForm, EditProfileForm,
 )
@@ -31,8 +33,6 @@ def login_view(request):
     return render(request, 'accounts/login.html', context)
 
 
-
-
 def register_view(request):
     if request.method == 'POST':
         form = RegForm(request.POST)
@@ -54,12 +54,15 @@ def logout_view(request):
     return redirect('/')
 
 
+@login_required
 def profile_view(request):
-    args = {'user': request.user}
-    return render(request, 'accounts/profile.html', args)\
+    profile = UserProfile.objects.get(user=request.user)
+    args = {'user': request.user, 'profile': profile}
+
+    return render(request, 'accounts/profile.html', args)
 
 
-
+@login_required
 def edit_profile_view(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -74,6 +77,7 @@ def edit_profile_view(request):
         return render(request, 'accounts/edit_profile.html', args)
 
 
+@login_required
 def change_pw_view(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)

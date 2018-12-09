@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^suggest/$', views.suggestion_view, name='suggestion'),
     url(r'^$', views.home, name='home'),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^accounts/', include('accounts.urls'))
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^application/', include('application.urls', namespace='application')),
 
 ]
 

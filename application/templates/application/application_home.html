@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block tile %}My Application{% endblock %}
+{% block content %}
+<div class="cards">
+<p>it worked</p>
+    {% for application in applications %}
+    <div class="card">
+        <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>
+        <div class="card-copy">
+            <p>it worked</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

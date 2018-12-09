@@ -25,17 +25,28 @@
                 <a class="navbar-brand" href="#">University for Young People</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
+                  {% if user.is_authenticated %}
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li><a href="{% url 'application:application_home' %}">Application Center</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                    <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'accounts:edit_profile' %}">edit</a></li>
+                </ul>
+                    {% else %}
+                  <ul class="nav navbar-nav">
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
                     <li><a href="{% url 'accounts:login' %}">Login</a></li>
-                    <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
-                    <li><a href="{% url 'accounts:edit_profile' %}">edit</a></li>
-
-
                 </ul>
+                  {% endif %}
               </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
           </nav>
