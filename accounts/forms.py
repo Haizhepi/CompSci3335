@@ -1,4 +1,6 @@
 from django import forms
+import datetime
+from .models import UserProfile
 from django.contrib.auth import (
     authenticate,
     get_user_model
@@ -46,6 +48,26 @@ class EditProfileForm(UserChangeForm):
         # exclude = ()
 
 
+class Profile_form(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = (
+            'middle',
+            'suffix',
+            'address1',
+            'address2',
+            'city',
+            'state',
+            'zip',
+            'phone',
+            'grad_year',
+            'birth_date',
+            'accepted_to_GT_program',
+            'english_learn',
+
+        )
+
 User = get_user_model()
 
 
@@ -67,3 +89,13 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError('not active')
 
         return super(UserLoginForm, self).clean(*args, **kwargs)
+
+
+def year_choices():
+    return [(r,r) for r in range(1984, datetime.date.today().year+1)]
+
+
+def current_year():
+    return datetime.date.today().year
+
+

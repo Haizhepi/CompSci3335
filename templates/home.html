@@ -4,4 +4,5 @@
 
 {% block content %}
 <h1>Welcome!</h1>
+    {% if user.is_authenticated %}<h3>{{ user }}</h3>{% endif %}
 {% endblock %}

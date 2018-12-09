@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from . import forms
 from django.contrib.auth import (
     authenticate,
     get_user_model,
@@ -65,14 +66,18 @@ def profile_view(request):
 @login_required
 def edit_profile_view(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
+        form1 = EditProfileForm(request.POST, instance=request.user)
+        form2 = forms.Profile_form(request.POST, instance=UserProfile.objects.get(user=request.user))
+        if form1.is_valid() and form2.is_valid():
+            form1.save()
+            obj = form2.save(commit=False)
+            obj.user = request.user
+            obj.save()
             return redirect('/accounts/profile')
     else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form}
+        form1 = EditProfileForm(instance=request.user)
+        form2 = forms.Profile_form(instance=UserProfile.objects.get(user=request.user))
+        args = {'form1': form1, 'form2': form2}
 
         return render(request, 'accounts/edit_profile.html', args)
 
@@ -93,4 +98,7 @@ def change_pw_view(request):
         args = {'form': form}
 
         return render(request, 'accounts/change_password.html', args)
+
+
+
 

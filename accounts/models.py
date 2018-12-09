@@ -25,6 +25,10 @@ class UserProfile(models.Model):
             ('Y', 'Yes'),
             ('N', 'No'),
         )
+        status = (
+            ('A', 'active'),('G', 'Graduated'),('M', 'Moved away'),('N', 'No longer interested'),('U', 'Undefined')
+        )
+        student_status = models.CharField(max_length=1, choices=status, default='U')
         accepted_to_GT_program = models.CharField(max_length=1, choices=yes_or_no_unsure, default='N')
         english_learn = models.CharField(max_length=1, choices=yes_or_no, default='Y')
         approved_to_register = models.CharField(max_length=1, choices=yes_or_no, default='N')

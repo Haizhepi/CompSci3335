@@ -5,8 +5,15 @@ from django.shortcuts import get_object_or_404, render
 
 
 def application_list(request):
+    # applications = get_object_or_404(Application, user=request.user)
+
     applications = Application.objects.all()
-    return render(request, 'application/application_home.html', {'applications': applications})
+    listapp = []
+    for application in applications:
+        if application.user == request.user:
+            listapp.append(application)
+
+    return render(request, 'application/application_home.html', {'applications': listapp})
 
 
 def application_detail(request, pk):

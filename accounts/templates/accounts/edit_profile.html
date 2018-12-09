@@ -4,7 +4,8 @@
 {% block content %}
     <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form1.as_p }}
+        {{ form2.as_p }}
     <button type="submit" class="btn btn-info">submit</button>
     </form>
 
