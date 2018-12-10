@@ -16,14 +16,26 @@ from accounts.models import UserProfile
 
 def application_list(request):
     # applications = get_object_or_404(Application, user=request.user)
+    val = 0
+    if Parent.objects.filter(user=request.user):
+        val += 33
+    if School.objects.filter(user=request.user):
+        val += 33
+    if UserProfile.objects.filter(user=request.user):
+        val += 33
 
     applications = Application.objects.all()
     listapp = []
+    flag = True
     for application in applications:
         if application.user == request.user:
             listapp.append(application)
+            if flag and application.application_status == 'A':
+                val += 1
+                flag = False
 
-    return render(request, 'application/application_home.html', {'applications': listapp})
+
+    return render(request, 'application/application_home.html', {'applications': listapp, 'progress': val})
 
 
 @login_required

@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th, td {
+          text-align: left;
+          padding: 8px;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
 </head>
 <body>
 <h1 align="center">Application Detail</h1>
@@ -30,13 +41,13 @@
               <th>Application Status</th>
           </tr>
             <tr>
-                <th>{{ application.user.username }}</th>
-                <th><p><span id="datetime"></span></p>
+                <td>{{ application.user.username }}</td>
+                <td><p><span id="datetime"></span></p>
                 <script>
                 var dt = new Date();
                 document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
-                </script></th>
-                <th>{% if application.application_status == 'A' %}Accepted{% else %}Pending{% endif %}</th>
+                </script></td>
+                <td>{% if application.application_status == 'A' %}Accepted{% else %}Pending{% endif %}</td>
             </tr>
         </table>
     </div>
@@ -54,13 +65,13 @@
               <th>Phone</th>
           </tr>
           <tr>
-              <th>{{ application.user.username }}</th>
-              <th>{{ application.user.first_name }}</th>
-              <th>{{ application.user.last_name }}</th>
-              <th>{{ application.user.email }}</th>
-              <th>{{ application.user_profile.city }}</th>
-              <th>{{ application.user_profile.birth_date }}</th>
-              <th>{{ application.user_profile.phone }}</th>
+              <td>{{ application.user.username }}</td>
+              <td>{{ application.user.first_name }}</td>
+              <td>{{ application.user.last_name }}</td>
+              <td>{{ application.user.email }}</td>
+              <td>{{ application.user_profile.city }}</td>
+              <td>{{ application.user_profile.birth_date }}</td>
+              <td>{{ application.user_profile.phone }}</td>
           </tr>
       </table>
     </div>
@@ -72,13 +83,11 @@
               <th>Username</th>
               <th>School Name</th>
               <th>School Type</th>
-              <th>GPA</th>
           </tr>
           <tr>
-              <th>{{ application.user.username }}</th>
-              <th>{{ application_school.school_name }}</th>
-              <th>{% if  application_school.type  == 'pi' %}Private{% else %}Public{% endif %}</th>
-              <th>{{ application_school.grade }}</th>
+              <td>{{ application.user.username }}</td>
+              <td>{{ application_school.school_name }}</td>
+              <td>{% if  application_school.type  == 'pi' %}Private{% else %}Public{% endif %}</td>
         </table>
     </div>
     <div id="menu3" class="tab-pane fade">
@@ -92,10 +101,10 @@
               <th>Parent Phone Number</th>
           </tr>
           <tr>
-              <th>{{ application.user.username }}</th>
-              <th>{{ application_parent.name }}</th>
-              <th>{{ application_parent.email }}</th>
-              <th>{{ application_parent.cell_phone }}</th>
+              <td>{{ application.user.username }}</td>
+              <td>{{ application_parent.name }}</td>
+              <td>{{ application_parent.email }}</td>
+              <td>{{ application_parent.cell_phone }}</td>
         </table>
     </div>
   </div>

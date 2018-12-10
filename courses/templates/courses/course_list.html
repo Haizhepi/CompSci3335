@@ -3,7 +3,9 @@
 {% block title %}Available Courses{% endblock %}
 
 {% block content %}
+    <h1 align="center">Courses Available</h1>
      <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <br/>
 <div class="cards">
     {% for course in courses %}
     <div class="card">
@@ -13,4 +15,6 @@
     </div>
     {% endfor %}
 </div>
+    <br/>
 {% endblock %}
+<br/>

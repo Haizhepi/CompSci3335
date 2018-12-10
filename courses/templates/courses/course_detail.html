@@ -3,19 +3,46 @@
 {% block title %}{{ course.title }}{% endblock %}
 
 {% block content %}
+    <head>
+        <style>
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            th, td {
+              text-align: left;
+              padding: 8px;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
+        </style>
+    </head>
 <article>
+    <h1 align="center">Course Detail</h1>
+    <br/>
     <h2>{{ course.title }}</h2>
-    {{ course.description }}
-
-    <section>
-    {% for section in course.section_set.all %}
-            <h3>
-                <a href="{% url 'courses:section' course_pk=section.course.pk section_pk=section.pk %}">sign up</a>
-            </h3>
-        <h2>{% if section.section_time == '1' %}Section time slot: 9:45-11:15am{% else %}Section time slot: 1:15-2:45pm{% endif %}</h2>
-        <h3>Section Capacity:  {{ section.capacity }}</h3>
-
+    <br/>
+    <table>
+        <tr>
+            <th>Course Title</th>
+            <th>Course Level</th>
+            <th>Course Description</th>
+            <th>Course Instructor</th>
+            <th>Time Slot</th>
+            <th>Capacity</th>
+            <th>Sign Up</th>
+        </tr>
+        {% for section in course.section_set.all %}
+        <tr>
+            <td>{{ course.title }}</td>
+            <td>{% if course.level == 'U' %} Undefined Level {% else %} {{ course.course_level }} level {% endif %}</td>
+            <td>{{ course.description }}</td>
+            <td>{{ course.instructor }}</td>
+            <td>Slot #{{ section.section_time }}</td>
+            <td>{{ section.capacity }}</td>
+            <td><a href="{% url 'courses:section' course_pk=section.course.pk section_pk=section.pk %}">Sign Up</a></td>
+        </tr>
         {% endfor %}
-    </section>
+    </table>
+<br/><br/><br/>
 </article>
 {% endblock %}

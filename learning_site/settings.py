@@ -38,7 +38,8 @@ INSTALLED_APPS = (
     'courses',
     'accounts',
     'application',
-    'crispy_forms'
+    'crispy_forms',
+    'import_export',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,3 +113,5 @@ STATICFILES_DIRS = (
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
