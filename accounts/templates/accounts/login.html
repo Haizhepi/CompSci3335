@@ -2,16 +2,23 @@
 {% load crispy_forms_tags %}
 {% block title %}Login{% endblock %}
 {% block content %}
-
-    <h1 align="center">LOGIN</h1>
-    <br/>
-    <center>
-        <form method="POST" style="width: 200px;">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <br/>
-            <input type="submit" class="btn btn-default">
-        </form>
-    </center>
-
+<head>
+    <style>
+    </style>
+</head>
+    <body>
+        <br/>
+        <center>
+            <div class="card bg-secondary text-white" style="width: 300px;" >
+                <form method="POST" style="width: 200px;">
+                    <h1 align="center">LOGIN</h1>
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form|crispy }}</div>
+                    <br/>
+                    <input type="submit" class="btn btn-default">
+                    </form>
+                </div>
+        </center>
+    </body>
 {% endblock %}

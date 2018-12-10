@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from accounts.models import UserProfile
-from .models import Course, Step, Section
+from .models import Course, Section, Take
 
 
 def course_list(request):
@@ -36,6 +36,14 @@ def course_detail(request, pk):
 #     return render(request,'courses/section_detail.html', {'section': section})##############
 
 
-def step_detail(request, course_pk, step_pk):
-    step = get_object_or_404(Step, course_id=course_pk, pk=step_pk)
-    return render(request, 'courses/step_detail.html', {'step': step})
+def step_detail(request, course_pk, section_pk):
+    section = get_object_or_404(Section, course_id=course_pk, pk=section_pk)
+    if Take.objects.filter(user=request.user, section=section):
+        print('exist')
+        return render(request, 'courses/reg_failed.html', {'section': section})
+    else:
+        section.capacity = section.capacity - 1
+        Take.objects.create(user=request.user, section=section).save()
+
+    return render(request, 'courses/step_detail.html', {'section': section})
+

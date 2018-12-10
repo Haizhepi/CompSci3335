@@ -2,21 +2,76 @@
 
 {% block tile %}My Application{% endblock %}
 {% block content %}
-<div class="cards">
-<p>it worked</p>
-    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_profile'%}">finish profile</a></button>
-    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_school'%}">your school</a></button>
-    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_parent'%}">your parent</a></button>
-    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_start'%}">start application!</a></button>
+<head>
+    <script>
+        $('input').on('click', function(){
+            var valeur = 0;
+            $('input:checked').each(function(){
+                if ( $(this).attr('value') > valeur ) {
+                    valeur =  $(this).attr('value');
+                }
+            });
+            $('.progress-bar').css('width', valeur+'%').attr('aria-valuenow', valeur);
+        });
+    </script>
+    <style>
+        .tasks{
+            background-color: #F6F8F8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .tasks span{
+            font-weight: bold;
+        }
+        .tasks input{
+            display: block;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+        .tasks a{
+            color: #000;
+            text-decoration: none;
+            border:none;
+        }
+        .tasks a:hover{
+            border-bottom: dashed 1px #0088cc;
+        }
+        .tasks label{
+            display: block;
+            text-align: center;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-    {% for application in applications %}
+<center>
+    <div class="cards">
+        <h1>Application Center</h1>
+        <h3 align="left">Your Progress of Current Application</h3>
+        <div class="progress">
+            <div div id="dynamic" class="progress-bar progress-bar-striped active" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                    75%
+            </div>
+        </div>
+            <button type="submit" class="btn btn-info" style="margin: 20px" ><a href="{% url 'application:application_profile'%}">Complete Profile</a></button>
+            <button type="submit" class="btn btn-info" style="margin: 20px"><a href="{% url 'application:application_school'%}">School Information</a></button>
+            <button type="submit" class="btn btn-info" style="margin: 20px"><a href="{% url 'application:application_parent'%}">Parent Information</a></button>
+            <button type="submit" class="btn btn-info" style="margin: 20px"><a href="{% url 'application:application_start'%}">Submit Application!</a></button>
+
+    </div>
+</center>
+<h3>View Your Applications</h3>
+{% for application in applications %}
     <div class="card">
         <div class="card-copy">
-                    <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>
+            <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>
             <p>{% if application.application_status == 'A' %}Accepted{% else %}Pending{% endif %}</p>
-
         </div>
     </div>
-    {% endfor %}
-</div>
+{% endfor %}
+
 {% endblock %}

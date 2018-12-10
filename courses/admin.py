@@ -1,11 +1,6 @@
 from django.contrib import admin
 
-from .models import Course, Step, Section
-
-
-class StepInline(admin.StackedInline):
-    model = Step
-    extra = 1
+from .models import Course, Section, Take
 
 
 class SessionInLine(admin.StackedInline):
@@ -14,8 +9,9 @@ class SessionInLine(admin.StackedInline):
 
 
 class CourseAdmin(admin.ModelAdmin):
-    inlines = [SessionInLine, StepInline, ]
+    inlines = [SessionInLine, ]
 
 
 admin.site.register(Course, CourseAdmin)
-admin.site.register(Step)
+admin.site.register(Section)
+admin.site.register(Take)

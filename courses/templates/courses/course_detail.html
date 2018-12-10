@@ -10,17 +10,10 @@
     <section>
     {% for section in course.section_set.all %}
             <h3>
-{#                <a href="{% url 'courses:section' course_pk=section section_pk=section.pk %}">{{ step.title }}</a>#}
+                <a href="{% url 'courses:section' course_pk=section.course.pk section_pk=section.pk %}">sign up</a>
             </h3>
         <h2>{% if section.section_time == '1' %}Section time slot: 9:45-11:15am{% else %}Section time slot: 1:15-2:45pm{% endif %}</h2>
         <h3>Section Capacity:  {{ section.capacity }}</h3>
-
-        {% endfor %}
-        {% for step in course.step_set.all %}
-            <h3>
-                <a href="{% url 'courses:step' course_pk=step.course.pk step_pk=step.pk %}">{{ step.title }}</a>
-            </h3>
-            {{ step.description }}
 
         {% endfor %}
     </section>

@@ -1,11 +1,10 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ step.title }} - {{ step.course.title }}{% endblock %}
+{% block title %}{{ section.capacity }} - {{ section.course.title }}{% endblock %}
 
 {% block content %}
 <article>
-    <h2><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></h2>
-    <h3>{{ step.title }}</h3>
-    {{ step.content|linebreaks }}
+    <h3>it worked</h3>
+<h4>{{ section.capacity }} - {{ section.course.title }}</h4>
 </article>
 {% endblock %}
