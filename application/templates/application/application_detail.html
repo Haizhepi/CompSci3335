@@ -30,7 +30,7 @@
               <th>Application Status</th>
           </tr>
             <tr>
-                <th>{{ user.username }}</th>
+                <th>{{ application.user.username }}</th>
                 <th><p><span id="datetime"></span></p>
                 <script>
                 var dt = new Date();
@@ -54,13 +54,13 @@
               <th>Phone</th>
           </tr>
           <tr>
-              <th>{{ user.username }}</th>
-              <th>{{ user.first_name }}</th>
-              <th>{{ user.last_name }}</th>
-              <th>{{ user.email }}</th>
-              <th>{{ profile.city }}</th>
-              <th>{{ profile.birth_date }}</th>
-              <th>{{ profile.phone }}</th>
+              <th>{{ application.user.username }}</th>
+              <th>{{ application.user.first_name }}</th>
+              <th>{{ application.user.last_name }}</th>
+              <th>{{ application.user.email }}</th>
+              <th>{{ application.user_profile.city }}</th>
+              <th>{{ application.user_profile.birth_date }}</th>
+              <th>{{ application.user_profile.phone }}</th>
           </tr>
       </table>
     </div>
@@ -72,10 +72,10 @@
               <th>Username</th>
               <th>School Name</th>
               <th>School Type</th>
-              <th>Grade</th>
+              <th>GPA</th>
           </tr>
           <tr>
-              <th>{{ user.username }}</th>
+              <th>{{ application.user.username }}</th>
               <th>{{ application_school.school_name }}</th>
               <th>{% if  application_school.type  == 'pi' %}Private{% else %}Public{% endif %}</th>
               <th>{{ application_school.grade }}</th>
@@ -92,7 +92,7 @@
               <th>Parent Phone Number</th>
           </tr>
           <tr>
-              <th>{{ user.username }}</th>
+              <th>{{ application.user.username }}</th>
               <th>{{ application_parent.name }}</th>
               <th>{{ application_parent.email }}</th>
               <th>{{ application_parent.cell_phone }}</th>

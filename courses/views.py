@@ -31,14 +31,10 @@ def course_detail(request, pk):
     return render(request, 'courses/course_detail.html', {'course': course, })
 
 
-# def section_detail(request, pk):                            ##############'section':section
-#     section = get_object_or_404(Section, pk=pk)     section = get_object_or_404(Section, pk=pk)            ##############
-#     return render(request,'courses/section_detail.html', {'section': section})##############
-
-
 def step_detail(request, course_pk, section_pk):
     section = get_object_or_404(Section, course_id=course_pk, pk=section_pk)
-    if Take.objects.filter(user=request.user, section=section):
+    user_profile = UserProfile.objects.filter(user=request.user).first()
+    if Take.objects.filter(user=request.user, section=section) and user_profile.approved_to_register != 'Y':
         print('exist')
         return render(request, 'courses/reg_failed.html', {'section': section})
     else:
@@ -47,3 +43,7 @@ def step_detail(request, course_pk, section_pk):
 
     return render(request, 'courses/step_detail.html', {'section': section})
 
+
+def my_sections(request):
+    my_courses = Take.objects.filter(user=request.user)
+    return render(request, 'courses/my_course.html', {'courses': my_courses})

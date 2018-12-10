@@ -9,4 +9,5 @@ urlpatterns = [
     # url(r'(?P<pk>\d+)/$', views.section_detail,
     #     name='section'),
     url(r'(?P<pk>\d+)/$', views.course_detail, name='detail'),
+    url(r'my_course/$', views.my_sections, name='my_sections')
 ]

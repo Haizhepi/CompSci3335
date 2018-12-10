@@ -57,17 +57,26 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    profile = UserProfile.objects.get(user=request.user)
-    args = {'user': request.user, 'profile': profile}
+    if UserProfile.objects.filter(user=request.user):
+        profile = UserProfile.objects.get(user=request.user)
+        args = {'user': request.user, 'profile': profile}
 
-    return render(request, 'accounts/profile.html', args)
+        return render(request, 'accounts/profile.html', args)
+    else:
+        return redirect('accounts:edit_profile')
 
 
 @login_required
 def edit_profile_view(request):
     if request.method == 'POST':
-        form1 = EditProfileForm(request.POST, instance=request.user)
-        form2 = forms.Profile_form(request.POST, instance=UserProfile.objects.get(user=request.user))
+        form1 = None
+        form2 = None
+        if UserProfile.objects.filter(user=request.user):
+            form1 = EditProfileForm(request.POST, instance=request.user)
+            form2 = forms.Profile_form(request.POST, instance=UserProfile.objects.get(user=request.user))
+        else:
+            form1 = EditProfileForm(request.POST, instance=request.user)
+            form2 = forms.Profile_form(request.POST)
         if form1.is_valid() and form2.is_valid():
             form1.save()
             obj = form2.save(commit=False)
@@ -75,11 +84,16 @@ def edit_profile_view(request):
             obj.save()
             return redirect('/accounts/profile')
     else:
-        form1 = EditProfileForm(instance=request.user)
-        form2 = forms.Profile_form(instance=UserProfile.objects.get(user=request.user))
-        args = {'form1': form1, 'form2': form2}
-
-        return render(request, 'accounts/edit_profile.html', args)
+        if UserProfile.objects.filter(user=request.user):
+            form1 = EditProfileForm(instance=request.user)
+            form2 = forms.Profile_form(instance=UserProfile.objects.get(user=request.user))
+            args = {'form1': form1, 'form2': form2}
+            return render(request, 'accounts/edit_profile.html', args)
+        else:
+            form1 = EditProfileForm()
+            form2 = forms.Profile_form()
+            args = {'form1': form1, 'form2': form2}
+            return render(request, 'accounts/edit_profile.html', args)
 
 
 @login_required

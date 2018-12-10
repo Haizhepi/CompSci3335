@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% block title %}My Courses{% endblock %}
+
+{% block content %}
+     <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+<div class="cards">
+    {% for course in courses %}
+    <div class="card">
+        <h3>{{ course.section.course.title }}</h3>
+        <h3>{{ course.section.section_time}}</h3>
+
+        <div class="card-copy">
+            {{ course.section.capacity }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

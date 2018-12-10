@@ -29,7 +29,10 @@ def application_list(request):
 @login_required
 def application_detail(request, pk):
     application = get_object_or_404(Application, pk=pk)
-    return render(request, 'application/application_detail.html', {'application': application})
+    school = School.objects.filter(user=request.user)
+    parent = Parent.objects.filter(user=request.user)
+    args = {'application': application, 'application_school': school.first, 'application_parent': parent.first}
+    return render(request, 'application/application_detail.html',args )
 
 
 @login_required
@@ -124,7 +127,6 @@ def application_start(request):
         return render(request, 'application/success.html', args)
     else:
         return render(request, 'application/Failed.html', args)
-
 
 
 
