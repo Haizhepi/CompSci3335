@@ -2,14 +2,98 @@
 
 {% block title %}Profile{% endblock %}
 {% block content %}
-    <h1>Profile</h1>
-    <p>Username: {{ user.username }}</p>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>City: {{ profile.city }}</p>
-    <p>BirthDate: {{ profile.birth_date }}</p>
-    <p>Phone: {{ profile.phone }}</p>
+
+
+<head>
+    <style>
+        /* Create two unequal columns that floats next to each other */
+        /* Left column */
+        .leftcolumn {
+          float: left;
+          width: 20%;
+        }
+        /* Right column */
+        .rightcolumn {
+          float: left;
+          width: 80%;
+          padding-left: 150px;
+        }
+        .image {
+          opacity: 1;
+          display: block;
+          margin: auto;
+          width: 160px;
+          height: 160px;
+          transition: .5s ease;
+          backface-visibility: hidden;
+        }
+        div.a {
+            text-indent: 50px;
+        }
+        /* Add a card effect for articles */
+        .card {
+          background-color: white;
+          padding: 20px;
+          margin-top: 20px;
+        }
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 800px) {
+          .leftcolumn, .rightcolumn {
+            width: 100%;
+            padding: 0;
+          }
+        }
+        /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+        @media screen and (max-width: 400px) {
+          .topnav a {
+            float: none;
+            width: 100%;
+          }
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Welcome {{ user.username }}</h1>
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>Profile</h2>
+            <img src="https://www.w3schools.com/css/img_avatar.png" style="width:160px;height:160px;">
+            <form action>
+                <br/>
+                <input type="file" name="pic" accept="image/*" align="center">
+                <br/>
+                <input type="submit" align="center">
+            </form>
+        </div>
+    </div>
+
+    <div class="rightcolumn">
+        <div class="card">
+
+            <h2>Student Information</h2>
+            <p>Username: {{ user.username }}</p>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>City: {{ profile.city }}</p>
+            <p>BirthDate: {{ profile.birth_date }}</p>
+            <p>Phone: {{ profile.phone }}</p>
+        </div>
+        <div class="card">
+            <h2>Parament Information</h2>
+            <p>Username: {{ user.username }}</p>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>City: {{ profile.city }}</p>
+            <p>BirthDate: {{ profile.birth_date }}</p>
+            <p>Phone: {{ profile.phone }}</p>
+        </div>
+    </div>
+</body>
+
+
+
 
 
 

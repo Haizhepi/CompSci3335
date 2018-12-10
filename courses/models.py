@@ -10,7 +10,6 @@ class Course(models.Model):
         ('U', 'Undefined')
     )
     course_level = models.CharField(max_length=1, choices=level, default='U')
-    capacity = models.IntegerField(default=0)
     instructor = models.CharField(max_length=255, default='TBA')
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -36,6 +35,7 @@ class Step(models.Model):
 
 
 class Section(models.Model):
+    capacity = models.IntegerField(default=0)
     course = models.ForeignKey(Course)
     session_time = (
         ('1', 'first week of June'),

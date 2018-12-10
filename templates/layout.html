@@ -10,8 +10,32 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
-       </head>
+        <style>
+            a:link {
+              text-decoration: none;
+            }
+            a:visited {
+              text-decoration: none;
+            }
+            a:hover {
+              text-decoration: underline;
+            }
+            a:active {
+              text-decoration: underline;
+            }
+            /* Footer */
+            .footer {
+              padding: 20px;
+              text-align: center;
+              background: #ddd;
+              margin-top: 20px;
+              width:100%;
+              bottom:0;
+            }
+        </style>
+    </head>
     <body>
+
         <div class="container">
           <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -28,14 +52,14 @@
                   {% if user.is_authenticated %}
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'home' %}">HOME</a></li>
-                    <li><a href="{% url 'courses:list' %}">courses</a></li>
+                    <li><a href="{% url 'courses:list' %}">Courses</a></li>
                     <li><a href="{% url 'application:application_home' %}">Application Center</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                     <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
-                    <li><a href="{% url 'accounts:edit_profile' %}">edit</a></li>
+                    <li><a href="{% url 'accounts:edit_profile' %}">Edit</a></li>
                 </ul>
                     {% else %}
                   <ul class="nav navbar-nav">
@@ -51,13 +75,18 @@
               </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
           </nav>
-
             {% block content %}{% endblock %}
         </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <div class="footer">
+      <p><b><a href="about.html">About us</a></b></p>
+      <p>Designed and built with all the love in the world by @Bo Fu, @Yunzhe Liu and @Clavin Tse .</p>
+    </div>
     </body>
 </html>

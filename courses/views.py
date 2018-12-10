@@ -5,18 +5,19 @@ from .models import Course, Step, Section
 
 def course_list(request):
     courses = Course.objects.all()
+    list_course = []
+    # for course in courses
     return render(request, 'courses/course_list.html', {'courses': courses})
 
 
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
-    section = get_object_or_404(Section, pk=pk)
 
-    return render(request, 'courses/course_detail.html', {'course': course, 'section':section})
+    return render(request, 'courses/course_detail.html', {'course': course, })
 
 
-# def section_detail(request, pk):                            ##############
-#     section = get_object_or_404(Section, pk=pk)            ##############
+# def section_detail(request, pk):                            ##############'section':section
+#     section = get_object_or_404(Section, pk=pk)     section = get_object_or_404(Section, pk=pk)            ##############
 #     return render(request,'courses/section_detail.html', {'section': section})##############
 
 

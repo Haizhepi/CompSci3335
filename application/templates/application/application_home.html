@@ -11,9 +11,10 @@
 
     {% for application in applications %}
     <div class="card">
-        <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>
         <div class="card-copy">
-            <p></p>
+                    <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>
+            <p>{% if application.application_status == 'A' %}Accepted{% else %}Pending{% endif %}</p>
+
         </div>
     </div>
     {% endfor %}
