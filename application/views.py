@@ -36,16 +36,28 @@ def application_detail(request, pk):
 def application_profile(request):
     if request.method == 'POST':
         form1 = EditProfileForm(request.POST, instance=request.user)
-        form2 = Profile_form(request.POST, instance=UserProfile.objects.get(user=request.user))
+        form2 = None
+        temp = None
+        try:
+            temp = UserProfile.objects.get(user=request.user)
+            form2 = Profile_form(request.POST, instance=temp)
+        except UserProfile.DoesNotExist:
+            form2 = Profile_form(request.POST)
         if form1.is_valid() and form2.is_valid():
             form1.save()
             obj = form2.save(commit=False)
             obj.user = request.user
             obj.save()
             return redirect('application:application_home')
+        else:
+            return redirect('application:application_profile')
     else:
         form1 = EditProfileForm(instance=request.user)
-        form2 = Profile_form(instance=UserProfile.objects.get(user=request.user))
+        try:
+            temp = UserProfile.objects.get(user=request.user)
+            form2 = Profile_form(request.POST, instance=temp)
+        except UserProfile.DoesNotExist:
+            form2 = Profile_form()
         args = {'form1': form1, 'form2': form2}
 
         return render(request, 'accounts/edit_profile.html', args)
@@ -82,30 +94,31 @@ def application_parent(request):
 
 
 def application_start(request):
-    app = Application.objects.create(user=request.user, user_profile=UserProfile.objects.get(user=request.user))
     valid = True
-    args = []
+    args = {}
+    user_profile = None
     try:
-        user_profile = UserProfile.objects.get(user=request.user)
-    except ObjectDoesNotExist:
+         user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
         valid = False
-        args.append('Incomplete profile')
+        args['profile'] = 'Incomplete profile'
 
     try:
         parent = []
         parent.append(Parent.objects.filter(user=request.user))
     except ObjectDoesNotExist:
         valid = False
-        args.append('No parent is related to your account')
+        args['parent'] ='No parent is related to your account'
 
     try:
         school = []
         school.append(School.objects.filter(user=request.user))
     except ObjectDoesNotExist:
         valid = False
-        args.append('No school is related to your account')
+        args['school'] = 'No school is related to your account'
 
     if valid:
+        app = Application.objects.create(user=request.user, user_profile=UserProfile.objects.get(user=request.user))
         app.application_status = 'P'
         app.save()
         return render(request, 'application/success.html', args)
