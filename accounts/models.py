@@ -5,7 +5,7 @@ import datetime
 
 
 class UserProfile(models.Model):
-        user = models.OneToOneField(User)
+        user = models.ForeignKey(User)
         middle = models.CharField(max_length=100, default='', blank=True)
         suffix = models.CharField(max_length=100, default='', blank=True)
         address1 = models.CharField(max_length=100, default='')
@@ -37,9 +37,3 @@ class UserProfile(models.Model):
             return self.user.username + "'s profile"
 
 
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
-
-post_save.connect(create_profile, sender=User)
