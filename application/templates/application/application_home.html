@@ -3,6 +3,7 @@
 {% block tile %}My Application{% endblock %}
 {% block content %}
 <head>
+
     <script>
         $('input').on('click', function(){
             var valeur = 0;
@@ -41,6 +42,15 @@
             display: block;
             text-align: center;
         }
+        table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            th, td {
+              text-align: left;
+              padding: 8px;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -64,14 +74,26 @@
 
     </div>
 </center>
+    <br/>
 <h3>View Your Applications</h3>
-{% for application in applications %}
-    <div class="card">
-        <div class="card-copy">
-            <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>
-            <p>{% if application.application_status == 'A' %}Accepted{% else %}Pending{% endif %}</p>
+    <br/>
+<div class="card">
+    <div class="card-copy">
+<table>
+    <tr>
+        <th>Application ID</th>
+        <th>Applicant</th>
+        <th>Application Status</th>
+    </tr>
+    {% for application in applications %}
+        <tr>
+                <td>{{ application.id }}</td>
+                <td><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></td>
+                <td>{% if application.application_status == 'A' %}Accepted{% else %}Pending{% endif %}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
         </div>
-    </div>
-{% endfor %}
 
 {% endblock %}

@@ -66,7 +66,7 @@ class Profile_form(forms.ModelForm):
             'birth_date',
             'accepted_to_GT_program',
             'english_learn',
-
+            'student_grade',
         )
 
 User = get_user_model()

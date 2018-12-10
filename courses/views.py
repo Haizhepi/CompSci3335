@@ -35,7 +35,7 @@ def course_detail(request, pk):
 def step_detail(request, course_pk, section_pk):
     section = get_object_or_404(Section, course_id=course_pk, pk=section_pk)
     user_profile = UserProfile.objects.filter(user=request.user).first()
-    if Take.objects.filter(user=request.user, section=section) and user_profile.approved_to_register != 'Y':
+    if Take.objects.filter(user=request.user, section=section) or user_profile.approved_to_register != 'Y':
         print('exist')
         return render(request, 'courses/reg_failed.html', {'section': section})
     else:
