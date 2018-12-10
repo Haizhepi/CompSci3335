@@ -63,7 +63,7 @@ def profile_view(request):
 
         return render(request, 'accounts/profile.html', args)
     else:
-        return redirect('accounts:edit_profile')
+        return render(request, "courses/profile_incomplete.html", {'message': 'You must finish your profile first'})
 
 
 @login_required

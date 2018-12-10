@@ -3,17 +3,40 @@
 {% block title %}My Courses{% endblock %}
 
 {% block content %}
-     <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <head>
+        <style>
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            th, td {
+              text-align: left;
+              padding: 8px;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
+        </style>
+    </head>
+<h1 align="center">My Course Schedule</h1>
+    <br/>
+<link rel="stylesheet" href="{% static 'css/layout.css' %}">
 <div class="cards">
-    {% for course in courses %}
-    <div class="card">
-        <h3>{{ course.section.course.title }}</h3>
-        <h3>{{ course.section.section_time}}</h3>
+    <table>
+        <tr>
+            <th>Course Title</th>
+            <th>Course Instructor</th>
+            <th>Time Slot</th>
+            <th>Capacity</th>
+        </tr>
 
-        <div class="card-copy">
-            {{ course.section.capacity }}
-        </div>
-    </div>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.section.course.title }}</td>
+            <td>{{ course.section.course.instructor }}</td>
+            <td>{{ course.section.section_time}}</td>
+            <td>{{ course.section.capacity }}</td>
+        </tr>
+
     {% endfor %}
+    </table>
 </div>
 {% endblock %}
