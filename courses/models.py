@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import User
 
 
 class Course(models.Model):
@@ -53,3 +54,8 @@ class Section(models.Model):
 
     def __str__(self):                              ########
         return self.session + self.section_time     ########
+
+
+class Take(models.Model):
+    user = models.ForeignKey(User)
+    section = models.ForeignKey(Section)
