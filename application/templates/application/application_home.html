@@ -4,6 +4,11 @@
 {% block content %}
 <div class="cards">
 <p>it worked</p>
+    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_profile'%}">finish profile</a></button>
+    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_school'%}">your school</a></button>
+    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_parent'%}">your parent</a></button>
+    <button type="submit" class="btn btn-info"><a href="{% url 'application:application_start'%}">start application!</a></button>
+
     {% for application in applications %}
     <div class="card">
         <header><a href="{% url 'application:application_detail' pk=application.pk %}">{{ application.user }}</a></header>

@@ -83,7 +83,7 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'UYP',
+        'NAME': 'UYP2',
         'USER': 'root',
         'PASSWORD': 'l',
     }
