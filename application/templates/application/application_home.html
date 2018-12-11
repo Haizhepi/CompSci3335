@@ -52,6 +52,7 @@
             }
             tr:nth-child(even) {background-color: #f2f2f2;}
     </style>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -63,15 +64,17 @@
         <h1>Application Center</h1>
         <h3 align="left">Your Progress of Current Application</h3>
         <div class="progress">
-            <div div id="dynamic" class="progress-bar progress-bar-striped active" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
+            <div div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
                     {{ progress }}%
             </div>
         </div>
-            <button type="submit" class="btn btn-info" style="margin: 20px" ><a href="{% url 'application:application_profile'%}">Complete Profile</a></button>
-            <button type="submit" class="btn btn-info" style="margin: 20px"><a href="{% url 'application:application_school'%}">School Information</a></button>
-            <button type="submit" class="btn btn-info" style="margin: 20px"><a href="{% url 'application:application_parent'%}">Parent Information</a></button>
-            <button type="submit" class="btn btn-info" style="margin: 20px"><a href="{% url 'application:application_start'%}">Submit Application!</a></button>
-
+        <br/>
+        <div class="btn-group btn-group-justified" algin="center">
+            <a href="{% url 'application:application_profile'%}"class="btn btn-primary">Complete Profile</a>
+            <a href="{% url 'application:application_school'%}"class="btn btn-primary">School Information</a>
+            <a href="{% url 'application:application_parent'%}"class="btn btn-primary">Parent Information</a>
+            <a href="{% url 'application:application_start'%}"class="btn btn-primary">Submit Application!</a>
+        </div>
     </div>
 </center>
     <br/>

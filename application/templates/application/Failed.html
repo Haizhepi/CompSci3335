@@ -2,16 +2,10 @@
 {% load crispy_forms_tags %}
 {% block title %}Parent{% endblock %}
 {% block content %}
-<center>
-    <h1>Parent Information</h1>
-    <br/><br/>
-    <form method="post" style="width: 300px">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <br/>
-        <button type="submit" class="btn btn-info">submit</button>
-    </form>
-</center>
+<h1 align="center">Your request has been denied!</h1>
+    <br/>
+    <h2 align="center">Your application has some problems.</h2>
+    <h3 align="center">You can check and resubmit again.</h3>
 
 
 {% endblock %}

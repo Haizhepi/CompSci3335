@@ -2,26 +2,35 @@ from django.shortcuts import get_object_or_404, render, HttpResponse, redirect
 from accounts.models import UserProfile
 from .models import Course, Section, Take
 from .resources import CourseResource
+from application.models import Application
 
 
 def course_list(request):
 
     if UserProfile.objects.filter(user=request.user):
+        applist = Application.objects.filter(user=request.user)
+        flag = False
+        for app in applist:
+            if app.application_status == 'A':
+                flag = True
         prof = UserProfile.objects.get(user=request.user)
+        if flag:
+            prof.approved_to_register = 'Y'
+            prof.save()
         if prof.approved_to_register:
             courses = Course.objects.all()
             list_course = []
             profile = UserProfile.objects.get(user=request.user)
             print(profile.grade)
             for course in courses:
-                if profile.student_grade in ('4', '5'):
-                    if course.course_level == '1':
+                if profile.student_grade in ('1', '2'):
+                    if course.course_level in ('1', ):
                         list_course.append(course)
-                elif profile.student_grade in ('6','7', '8'):
-                    if course.course_level == '2':
+                elif profile.student_grade in ('3', '4', '5'):
+                    if course.course_level in ('1', '2'):
                         list_course.append(course)
-                elif profile.student_grade in ('9','10', '11', '12'):
-                    if course.course_level == '3':
+                elif profile.student_grade in ('6','7', '8', '9'):
+                    if course.course_level in ('1', '2', '3'):
                         list_course.append(course)
                 else:
                     if course.level == 'U':

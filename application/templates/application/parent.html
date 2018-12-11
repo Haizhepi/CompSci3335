@@ -1,11 +1,17 @@
 {% extends "layout.html" %}
-
+{% load crispy_forms_tags %}
 {% block title %}Parent{% endblock %}
 {% block content %}
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-info">submit</button>
+<center>
+    <h1>Parent Information</h1>
+    <br/><br/>
+    <form method="post" style="width: 300px">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br/>
+        <button type="submit" class="btn btn-info">submit</button>
     </form>
+</center>
+
 
 {% endblock %}

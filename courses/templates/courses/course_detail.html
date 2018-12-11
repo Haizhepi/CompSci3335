@@ -28,6 +28,7 @@
             <th>Course Description</th>
             <th>Course Instructor</th>
             <th>Time Slot</th>
+            <th>Course session</th>
             <th>Capacity</th>
             <th>Sign Up</th>
         </tr>
@@ -38,6 +39,7 @@
             <td>{{ course.description }}</td>
             <td>{{ course.instructor }}</td>
             <td>Slot #{{ section.section_time }}</td>
+            <td>{{ section.session }}</td>
             <td>{{ section.capacity }}</td>
             <td><a href="{% url 'courses:section' course_pk=section.course.pk section_pk=section.pk %}">Sign Up</a></td>
         </tr>

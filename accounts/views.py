@@ -83,6 +83,8 @@ def edit_profile_view(request):
             obj.user = request.user
             obj.save()
             return redirect('/accounts/profile')
+        else:
+            return redirect('accounts:edit_profile')
     else:
         if UserProfile.objects.filter(user=request.user):
             form1 = EditProfileForm(instance=request.user)

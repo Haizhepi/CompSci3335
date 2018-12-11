@@ -29,18 +29,18 @@ class UserProfile(models.Model):
             ('A', 'active'),('G', 'Graduated'),('M', 'Moved away'),('N', 'No longer interested'),('U', 'Undefined')
         )
         grade = (
-            ('4', '4'),
-            ('5', '5'),
-            ('6', '6'),
-            ('7', '7'),
-            ('8', '8'),
-            ('9', '9'),
-            ('10', '10'),
-            ('11', '11'),
-            ('12', '12'),
+            ('1', '4'),
+            ('2', '5'),
+            ('3', '6'),
+            ('4', '7'),
+            ('5', '8'),
+            ('6', '9'),
+            ('7', '10'),
+            ('8', '11'),
+            ('9', '12'),
             ('U', 'Undefined'),
         )
-        student_grade = models.CharField(max_length=1, choices=grade,default='U')
+        student_grade = models.CharField(max_length=2, choices=grade,default='U')
         student_status = models.CharField(max_length=1, choices=status, default='U')
         accepted_to_GT_program = models.CharField(max_length=1, choices=yes_or_no_unsure, default='N')
         english_learn = models.CharField(max_length=1, choices=yes_or_no, default='Y')
